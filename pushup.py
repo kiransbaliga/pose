@@ -4,7 +4,7 @@ import mediapipe as mp
 import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
-bicep_curl = True
+pushup = True
 
 def calculate_angle(a,b,c):
     a = np.array(a) # First
@@ -43,7 +43,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         # Extract landmarks for Bicep Curl
         
         try:
-            bicep_curl = True
+            pushup = True
             landmarks = results.pose_landmarks.landmark
             
                 # Get coordinates
@@ -61,22 +61,21 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                                 )
             
             # Curl counter logic
-            if angle > 160:
+            if angle > 130:
                 stage = "down"
-            if angle < 30 and stage =='down':
+            if angle < 120 and stage =='down':
                 stage="up"
                 counter +=1
                 current_time_stamp = datetime.datetime.now()
                 # write counter and time stamp to log.txt
                 with open("log.txt", "a") as f:
-                    f.write(f"Bicep counter: {counter} | time: {current_time_stamp}\n")
+                    f.write(f"PushUp counter: {counter} | time: {current_time_stamp}\n")
                 
                 f.close()
-                print(current_time_stamp)
                 print(counter)
                        
         except:
-            bicep_curl=False
+            pushup=False
             pass
        
 
