@@ -136,7 +136,8 @@ try:
                                     )
 
             cv2.imshow('MediaPipe Pose', image)
-
+            if(counter == 5):
+                break
         # Break the loop if the user presses 'q'
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

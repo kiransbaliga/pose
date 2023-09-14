@@ -61,3 +61,14 @@ Bicep counter: 20 | time: 2023-09-13 16:44:35.203321
 Bicep counter: 21 | time: 2023-09-13 16:44:35.638030
 Bicep counter: 22 | time: 2023-09-13 16:44:38.187274
 Bicep counter: 23 | time: 2023-09-13 16:44:40.001240
+Bicep counter: 1 | time: 2023-09-14 15:05:21.270705
+Bicep counter: 2 | time: 2023-09-14 15:05:33.546337
+Bicep counter: 3 | time: 2023-09-14 15:05:51.324973
+Bicep counter: 4 | time: 2023-09-14 15:05:58.850958
+Bicep counter: 5 | time: 2023-09-14 15:06:04.540472
+Bicep counter: 1 | time: 2023-09-14 17:18:08.660360
+Bicep counter: 2 | time: 2023-09-14 17:18:27.052732
+Bicep counter: 3 | time: 2023-09-14 17:18:29.782104
+Bicep counter: 4 | time: 2023-09-14 17:18:31.873531
+Bicep counter: 5 | time: 2023-09-14 17:18:33.775645
+Squat counter: 1 | time: 2023-09-14 17:18:39.206263
