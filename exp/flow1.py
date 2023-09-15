@@ -232,6 +232,7 @@ try:
                                      )
                     if angle > 160:
                         stage = "down"
+                       
                     if angle < 30 and stage =='down':
                         stage="up"
                         counter +=1
@@ -241,8 +242,8 @@ try:
                         f.close()
                         print(current_time_stamp)
                         print(counter)
-                    cv2.rectangle(image, (20,20), (225,100), (255,106,141), -1)
-                    cv2.putText(image, f'Bicep: {counter}', (25, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                    cv2.rectangle(image, (20,20), (200,100), (255,106,141), -1)
+                    cv2.putText(image, f'Bicep: {counter}', (35, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                     mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
                                     mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 

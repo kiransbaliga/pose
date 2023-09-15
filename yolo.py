@@ -83,7 +83,7 @@ class FreshestFrame(threading.Thread):
 
 counter = 0
 camera="http://192.168.1.146:4747/video"
-capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture(camera)
 model = YOLO("yolo-Weights/yolov8n.pt")
 classNames = ["person"]
 random_names = ["Madhav", "Alphin", "Jacob"]
