@@ -172,3 +172,35 @@ Name: kiran | Bicep counter: 2 | time: 2023-09-15 12:58:04.776702
 Name: kiran | Bicep counter: 3 | time: 2023-09-15 12:58:06.475576
 Name: kiran | Bicep counter: 4 | time: 2023-09-15 12:58:08.479357
 Name: kiran | Bicep counter: 5 | time: 2023-09-15 12:58:10.376403
+Person Started: kiran | time: 2023-09-15 13:16:14.402228
+Name: kiran | Squat counter: 1 | time: 2023-09-15 13:16:23.153274
+Name: kiran | Squat counter: 2 | time: 2023-09-15 13:16:30.457802
+Name: kiran | Pushup counter: 1 | time: 2023-09-15 13:16:30.993854
+Name: kiran | Pushup counter: 2 | time: 2023-09-15 13:16:32.457850
+Name: kiran | Bicep counter: 1 | time: 2023-09-15 13:16:34.646689
+Name: kiran | Bicep counter: 2 | time: 2023-09-15 13:16:40.546067
+Name: kiran | Bicep counter: 3 | time: 2023-09-15 13:16:40.690112
+Person Started: kiran | time: 2023-09-15 13:21:43.565116
+Name: kiran | Squat counter: 1 | time: 2023-09-15 13:21:46.193155
+Name: kiran | Squat counter: 2 | time: 2023-09-15 13:21:53.533294
+Name: kiran | Pushup counter: 1 | time: 2023-09-15 13:21:56.102638
+Name: kiran | Pushup counter: 2 | time: 2023-09-15 13:21:56.312848
+Person Completed Warmup: kiran | time: 2023-09-15 13:21:56.313666
+Name: kiran | Bicep counter: 1 | time: 2023-09-15 13:22:00.380775
+Name: kiran | Bicep counter: 2 | time: 2023-09-15 13:22:01.028896
+Name: kiran | Bicep counter: 3 | time: 2023-09-15 13:22:04.316070
+Person Completed Workout: kiran | time: 2023-09-15 13:22:04.316841
+Person Started: kiran | time: 2023-09-15 13:36:23.255769
+Name: kiran | Squat counter: 1 | time: 2023-09-15 13:36:27.930326
+Name: kiran | Squat counter: 2 | time: 2023-09-15 13:36:32.095861
+Person Completed Squats: kiran | time: 2023-09-15 13:36:32.096716
+Name: kiran | Pushup counter: 1 | time: 2023-09-15 13:36:32.921232
+Name: kiran | Pushup counter: 2 | time: 2023-09-15 13:36:33.515518
+Person Completed Pushup: kiran | time: 2023-09-15 13:36:33.516294
+Person Completed Warmup: kiran | time: 2023-09-15 13:36:33.516307
+Name: kiran | Bicep counter: 1 | time: 2023-09-15 13:36:35.105069
+Name: kiran | Bicep counter: 2 | time: 2023-09-15 13:36:40.135816
+Name: kiran | Bicep counter: 3 | time: 2023-09-15 13:36:42.690723
+Person Completed Bicep Curl: kiran | time: 2023-09-15 13:36:42.691578
+Person Completed Workout: kiran | time: 2023-09-15 13:36:42.691590
+Person Started: kiran | time: 2023-09-15 13:40:15.772100
