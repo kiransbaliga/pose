@@ -12,7 +12,7 @@ from tqdm import tqdm
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-
+import requests
 cred = credentials.Certificate('serviceAccountKey.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
@@ -21,6 +21,35 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 bicep_curl = True
 
+
+
+
+
+def sendNotification(userId):
+    doc_ref = db.collection('Users').document(userId)
+    
+    doc = doc_ref.get()
+    if doc.exists:
+        data = doc.to_dict()
+        print(data)
+    else:
+        print("not exists")
+    url = 'https://us-central1-code-3823a.cloudfunctions.net/pushNotif'
+    headers = {'Accept': 'application/json'}  # Set the desired content type in the Accept header
+    
+    data = {
+        'registrationToken': data['token'],
+        'title': 'Hey ' + userId,
+        'body': 'You have started your workout statistics'
+    }
+    print(data)
+    response = requests.post(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        response_data = response.text  # Assuming the response is in JSON format
+        print(response_data)
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 COSINE_THRESHOLD = 0.5
 
@@ -223,7 +252,9 @@ try:
                 if "known" not in text:
                     with open("log.txt", "a") as f:
                         pname = text.split(" ")[0]
-                        f.write(f"Person Started: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
+                        print("This is jawaan", pname)
+                        f.write(f"Person Started: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
+                        sendNotification(pname)
                         flag=0
                     f.close()
             try:
