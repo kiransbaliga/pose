@@ -81,7 +81,7 @@ class FreshestFrame(threading.Thread):
             return (self.latestnum, self.frame)
 
 counter = 0
-capture = cv2.VideoCapture("http://192.168.1.146:4747/video")
+capture = cv2.VideoCapture("http://192.168.3.215:4747/video")
 
 # Create an instance of the FreshestFrame class
 freshest_frame = FreshestFrame(capture)
