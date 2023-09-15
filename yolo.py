@@ -82,12 +82,13 @@ class FreshestFrame(threading.Thread):
             return (self.latestnum, self.frame)
 
 counter = 0
-capture = cv2.VideoCapture("http://192.168.1.146:4747/video")
+camera="http://192.168.1.146:4747/video"
+capture = cv2.VideoCapture(0)
 model = YOLO("yolo-Weights/yolov8n.pt")
 classNames = ["person"]
-random_names = ["Chris", "John", "Jacob"]
+random_names = ["Madhav", "Alphin", "Jacob"]
 random_age = ["22","24","25"]
-random_calory = ["126kcal","354kcal","486kcal"]
+random_calory = ["126kcal","204kcal","486kcal"]
 # Create an instance of the FreshestFrame class
 freshest_frame = FreshestFrame(capture)
 counter = 0
@@ -109,16 +110,18 @@ try:
                         cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),3)
                         org = [x1,y1]
                         # in filled recatngle with white background and black text fill random name, age and calory
+                        if x1 < 320:
+                            counter = 0
+                        else:
+                            counter = 1
+                        cv2.rectangle(frame,(x1,y1-90),(x1+150,y1-20),(255,255,255),-1)
+                        cv2.putText(frame,"name: "+random_names[counter],(x1,y1-70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
                         
-                        cv2.rectangle(frame,(x1,y1-30),(x1+100,y1),(255,255,255),-1)
-                        cv2.putText(frame,random_names[counter],(x1,y1-10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
-                        cv2.rectangle(frame,(x1,y1),(x1+100,y1+30),(255,255,255),-1)
-                        cv2.putText(frame,random_age[counter],(x1,y1+20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
-                        cv2.rectangle(frame,(x1,y1+30),(x1+100,y1+60),(255,255,255),-1)
-                        cv2.putText(frame,random_calory[counter],(x1,y1+50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
+                        cv2.putText(frame,"age: "+random_age[counter],(x1,y1-50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
+                        
+                        cv2.putText(frame,"CAL: "+random_calory[counter],(x1,y1-30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),2)
 
                         
-                        counter = 0 if counter == 1 else 1
 
             cv2.imshow('iamge', frame)
             

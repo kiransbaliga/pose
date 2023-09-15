@@ -139,12 +139,13 @@ class FreshestFrame(threading.Thread):
             return (self.latestnum, self.frame)
 
 counter = 0
-capture = cv2.VideoCapture("http://192.168.1.146:4747/video")
+capture = cv2.VideoCapture(0)
 
 # Create an instance of the FreshestFrame class
 cur = "bicep curl"
 freshest_frame = FreshestFrame(capture)
 flag = 1
+text = "unknown"
 try:
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         directory = 'data'
@@ -192,6 +193,7 @@ try:
             
             fetures, faces = recognize_face(image, face_detector, face_recognizer)
             if faces is None:
+                text = "unknown"
                 continue
             
             for idx, (face,feature) in enumerate(zip(faces, fetures)):
@@ -212,7 +214,8 @@ try:
             if flag == 1 :
                 if "known" not in text:
                     with open("log.txt", "a") as f:
-                        f.write(f"Person Started: {text,datetime.datetime.now()}\n") 
+                        pname = text.split(" ")[0]
+                        f.write(f"Person Started: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
                         flag=0
             try:
                 
@@ -233,7 +236,7 @@ try:
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
                         with open("log.txt", "a") as f:
-                            f.write(f"Bicep counter: {counter} | time: {current_time_stamp}\n")
+                            f.write(f"Name: {pname} | Bicep counter: {counter} | time: {current_time_stamp}\n")
                         f.close()
                         print(current_time_stamp)
                         print(counter)
@@ -263,10 +266,8 @@ try:
                         stage="up"
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
-                        # write counter and time stamp to log.txt
                         with open("log.txt", "a") as f:
-                            f.write(f"Squat counter: {counter} | time: {current_time_stamp}\n")
-
+                            f.write(f"Name: {pname} | Squat counter: {counter} | time: {current_time_stamp}\n")
                         f.close()
                         print(current_time_stamp)
                         print(counter)
@@ -296,10 +297,8 @@ try:
                         stage="up"
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
-                        # write counter and time stamp to log.txt
                         with open("log.txt", "a") as f:
-                            f.write(f"Pushup counter: {counter} | time: {current_time_stamp}\n")
-
+                            f.write(f"Name: {pname} | Pushup counter: {counter} | time: {current_time_stamp}\n")
                         f.close()
                         print(current_time_stamp)
                         print(counter)

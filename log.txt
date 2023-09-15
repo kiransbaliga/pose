@@ -142,3 +142,33 @@ Person Started: ('unknown_1 (0.00)', datetime.datetime(2023, 9, 15, 10, 43, 23, 
 Bicep counter: 1 | time: 2023-09-15 10:43:32.983766
 Person Started: ('unknown_1 (0.00)', datetime.datetime(2023, 9, 15, 10, 48, 23, 68897))
 Person Started: ('kiran (0.67)', datetime.datetime(2023, 9, 15, 10, 49, 4, 24495))
+Bicep counter: 1 | time: 2023-09-15 11:01:41.101649
+Bicep counter: 2 | time: 2023-09-15 11:01:43.062093
+Bicep counter: 3 | time: 2023-09-15 11:01:55.779613
+Bicep counter: 4 | time: 2023-09-15 11:01:58.869818
+Bicep counter: 5 | time: 2023-09-15 11:02:01.659466
+Squat counter: 1 | time: 2023-09-15 11:02:22.873775
+Squat counter: 2 | time: 2023-09-15 11:02:29.453126
+Squat counter: 3 | time: 2023-09-15 11:02:41.579007
+Squat counter: 4 | time: 2023-09-15 11:02:49.039470
+Squat counter: 5 | time: 2023-09-15 11:02:53.159798
+Pushup counter: 1 | time: 2023-09-15 11:03:10.339993
+Pushup counter: 2 | time: 2023-09-15 11:03:16.841848
+Pushup counter: 3 | time: 2023-09-15 11:03:29.191432
+Pushup counter: 4 | time: 2023-09-15 11:03:29.375999
+Pushup counter: 5 | time: 2023-09-15 11:03:33.438286
+Person Started: ('kiran', '2023-09-15 12:54:21.134766')
+Bicep counter: 1 | time: 2023-09-15 12:54:31.071485
+Person Started: kiran | 2023-09-15 12:55:34.580020
+Person Started: kiran | time: 2023-09-15 12:56:04.315776
+Bicep counter: 1 | time: 2023-09-15 12:56:08.776813
+Bicep counter: 2 | time: 2023-09-15 12:56:14.673640
+Bicep counter: 3 | time: 2023-09-15 12:56:16.258776
+Bicep counter: 4 | time: 2023-09-15 12:56:20.860933
+Bicep counter: 5 | time: 2023-09-15 12:56:22.557255
+Person Started: kiran | time: 2023-09-15 12:57:59.740627
+Name: kiran | Bicep counter: 1 | time: 2023-09-15 12:58:02.876388
+Name: kiran | Bicep counter: 2 | time: 2023-09-15 12:58:04.776702
+Name: kiran | Bicep counter: 3 | time: 2023-09-15 12:58:06.475576
+Name: kiran | Bicep counter: 4 | time: 2023-09-15 12:58:08.479357
+Name: kiran | Bicep counter: 5 | time: 2023-09-15 12:58:10.376403
