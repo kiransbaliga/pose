@@ -9,10 +9,47 @@ import glob
 import time
 import math
 from tqdm import tqdm
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+import requests
+cred = credentials.Certificate('serviceAccountKey.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 bicep_curl = True
 
+
+
+
+
+def sendNotification(userId):
+    doc_ref = db.collection('Users').document(userId)
+    
+    doc = doc_ref.get()
+    if doc.exists:
+        data = doc.to_dict()
+        print(data)
+    else:
+        print("not exists")
+    url = 'https://us-central1-code-3823a.cloudfunctions.net/pushNotif'
+    headers = {'Accept': 'application/json'}  # Set the desired content type in the Accept header
+    
+    data = {
+        'registrationToken': data['token'],
+        'title': 'Hey ' + userId,
+        'body': 'You have started your workout statistics'
+    }
+    print(data)
+    response = requests.post(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        response_data = response.text  # Assuming the response is in JSON format
+        print(response_data)
+    else:
+        print(f"Request failed with status code {response.status_code}")
 
 COSINE_THRESHOLD = 0.5
 
@@ -139,7 +176,7 @@ class FreshestFrame(threading.Thread):
             return (self.latestnum, self.frame)
 
 counter = 0
-capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture("http://192.168.3.215:4747/video")
 
 # Create an instance of the FreshestFrame class
 cur = "squat"
@@ -215,8 +252,11 @@ try:
                 if "known" not in text:
                     with open("log.txt", "a") as f:
                         pname = text.split(" ")[0]
-                        f.write(f"Person Started: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
+                        print("This is jawaan", pname)
+                        f.write(f"Person Started: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
+                        sendNotification(pname)
                         flag=0
+                    f.close()
             try:
                 
                 if cur == "bicep curl":
@@ -231,6 +271,7 @@ try:
                                      )
                     if angle > 160:
                         stage = "down"
+                       
                     if angle < 30 and stage =='down':
                         stage="up"
                         counter +=1
@@ -240,8 +281,8 @@ try:
                         f.close()
                         print(current_time_stamp)
                         print(counter)
-                    cv2.rectangle(image, (0,0), (225,73), (245,117,16), -1)
-                    cv2.putText(image, f'Bicep: {counter}', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                    cv2.rectangle(image, (20,20), (200,100), (255,106,141), -1)
+                    cv2.putText(image, f'Bicep: {counter}', (35, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                     mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
                                     mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
@@ -249,9 +290,12 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 3):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['bicepCurl']['isCompleted'] = True
+                        doc_ref.set(doc_data)
                         with open("log.txt", "a") as f:
                             f.write(f"Person Completed Bicep Curl: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
-                            f.write(f"Person Completed Workout: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
                         f.close()
                         break
                 elif cur == "squat":
@@ -271,7 +315,6 @@ try:
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
                         with open("log.txt", "a") as f:
-
                             f.write(f"Name: {pname} | Squat counter: {counter} | time: {current_time_stamp}\n")
                         f.close()
                         print(current_time_stamp)
@@ -285,8 +328,13 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 2):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['squats']['isCompleted'] = True
+                        doc_ref.set(doc_data)
                         with open("log.txt", "a") as f:
                             f.write(f"Person Completed Squats: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
+                            f.write(f"Person Completed Warmup: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
                         f.close()
                         cur = "pushup"
                 elif cur == "pushup":
@@ -306,7 +354,6 @@ try:
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
                         with open("log.txt", "a") as f:
-                            
                             f.write(f"Name: {pname} | Pushup counter: {counter} | time: {current_time_stamp}\n")
                         f.close()
                         print(current_time_stamp)
@@ -320,12 +367,16 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 2):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['pushup']['isCompleted'] = True
+                        doc_ref.set(doc_data)
+                        cur = "bicep curl"
                         with open("log.txt", "a") as f:
-                            f.write(f"Person Completed Pushup: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")  
-                            f.write(f"Person Completed Warmup: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
+                            f.write(f"Person Completed pushups: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
+                            f.write(f"Person Completed Workout: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
                         f.close()
-                        cur="bicep curl"
-                    
+                        break
             except:
                 pass
 

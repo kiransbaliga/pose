@@ -176,7 +176,8 @@ class FreshestFrame(threading.Thread):
             return (self.latestnum, self.frame)
 
 counter = 0
-capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture("http://192.168.1.146:4747/video"
+                           )
 
 # Create an instance of the FreshestFrame class
 cur = "bicep curl"
@@ -269,11 +270,11 @@ try:
                                 tuple(np.multiply(elbow, [640, 480]).astype(int)),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                                      )
-                    if angle > 160:
-                        stage = "down"
+                    if angle <30 :
+                        stage = "up"
                        
-                    if angle < 30 and stage =='down':
-                        stage="up"
+                    if angle > 160 and stage =='up':
+                        stage="down"
                         counter +=1
                         current_time_stamp = datetime.datetime.now()
                         with open("log.txt", "a") as f:
