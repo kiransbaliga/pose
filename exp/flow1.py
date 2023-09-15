@@ -9,6 +9,14 @@ import glob
 import time
 import math
 from tqdm import tqdm
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+cred = credentials.Certificate('serviceAccountKey.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 bicep_curl = True
@@ -251,6 +259,10 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 3):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['bicepCurl']['isCompleted'] = True
+                        doc_ref.set(doc_data)
                         with open("log.txt", "a") as f:
                             f.write(f"Person Completed Bicep Curl: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
                         f.close()
@@ -285,6 +297,10 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 2):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['squats']['isCompleted'] = True
+                        doc_ref.set(doc_data)
                         with open("log.txt", "a") as f:
                             f.write(f"Person Completed Squats: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
                             f.write(f"Person Completed Warmup: "+ pname + " | time: " + str(datetime.datetime.now())+"\n") 
@@ -320,6 +336,10 @@ try:
                     cv2.imshow('MediaPipe Pose', image)
                     if(counter == 2):
                         counter = 0
+                        doc_ref = db.collection("Workouts").document(pname)
+                        doc_data = doc_ref.get().to_dict()
+                        doc_data['pushup']['isCompleted'] = True
+                        doc_ref.set(doc_data)
                         with open("log.txt", "a") as f:
                             f.write(f"Person Completed pushups: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
                             f.write(f"Person Completed Workout: "+ pname + " | time: " + str(datetime.datetime.now())+"\n")
